@@ -51,7 +51,7 @@ helm install ./ --name rancher --namespace rancher-system --set fqdn=your.domain
 
 ## Connecting to a `localhost` Rancher Server
 
-By default Rancher is listening on `rancher.localhost` for connections. You will need to set up an `hosts` entry to connect.
+By default Rancher is listening on `rancher.localhost` for connections. You will need to set up a `hosts` entry to connect.
 
 * Windows - `c:\windows\system32\drivers\etc\hosts`
 * Mac - `/etc/hosts`
