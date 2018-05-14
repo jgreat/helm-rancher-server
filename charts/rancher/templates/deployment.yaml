@@ -1,0 +1,21 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: rancher
+spec:
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: rancher
+    spec:
+      serviceAccountName: rancher-admin
+      containers:
+      - image: rancher/rancher:{{ .Values.rancher_image_tag }}
+        imagePullPolicy: Always
+        name: rancher-server
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        - containerPort: 443
+          protocol: TCP

@@ -1,0 +1,53 @@
+# This will require a hosts or DNS entry.
+# Windows: c:\windows\system32\drivers\etc\hosts
+# Mac: /etc/hosts
+#
+# 127.0.0.1 rancher.localhost
+#
+fqdn: rancher.localhost
+
+# Ingress
+# - Rancher Self-Signed (passthrough)
+# The Default is to set passthrough so rancher uses its self-signed certs.
+# Your web browser will complain, but Rancher will still work.
+#
+# ingress.tls=passthrough
+#
+# - Your own Certs.
+# If you have your own certs and a DNS entry, you can add the certs to the
+# rancher-system namespace as the "tls-rancher" k8s secret.
+#
+# kubectl -n rancher-system create secret generic tls-rancher \
+# --from-file=tls.crt --from-file=tls.key
+#
+# fqdn=your.domain.name.com 
+# ingress.tls=cert
+#
+# - LetsEncrypt
+# Lets Encrypt will require the Rancher Server(ingress) to be accessible from
+# the internet and a Public DNS record that points to the Rancher Server.
+#
+# This will install stable/cert-manager to manage the ssl cert renewal.
+#
+# fqdn=your.domain.name.com
+# ingress.tls=letsEncrypt
+# letsEncrypt.enabled=true
+# letsEncrypt.email=<your email>
+# letsEncrypt.environment=<staging | prod>
+#
+ingress:
+  tls: passthrough
+
+# LetsEncrypt config
+# ProTip: The prod environment only allows you to register a name 5 times a week.
+#         Use staging until you have your config right and you're not likely to rebuild.
+letsEncrypt:
+  email: none@example.com
+  enabled: false
+  environment: staging # staging or prod. Use staging until you get your config right.
+
+# rancher/rancher image tag. https://hub.docker.com/r/rancher/rancher/tags/
+rancher_image_tag: stable
+
+# Number of rancher server replicas.
+replicas: 1
