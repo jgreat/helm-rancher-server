@@ -1,0 +1,12 @@
+apiVersion: v1
+entries:
+  rancher:
+  - apiVersion: v1
+    created: 2018-05-14T09:56:14.006340172-05:00
+    digest: 824530b56059f9d415a349e2ad348a7cfed10c33e3bd548b22a62366fb66fe72
+    icon: https://github.com/rancher/ui/blob/master/public/assets/images/logos/welcome-cow.svg
+    name: rancher
+    urls:
+    - rancher-0.0.1.tgz
+    version: 0.0.1
+generated: 2018-05-14T09:56:14.005987885-05:00
