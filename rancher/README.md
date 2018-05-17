@@ -3,10 +3,17 @@
 Chart for installing Rancher server on a Kubernetes cluster.
 
 ## Installing
-Clone this repo and run `helm` from the `charts/rancher` directory.
+
+Add this repo
 
 ```
-helm install ./ --name rancher --namespace rancher-system
+helm repo add rancher-server https://jgreat.github.io/helm-rancher-server/charts
+```
+
+Install the rancher chart
+
+```
+helm install rancher-server/rancher --name rancher --namespace rancher-system
 ```
 
 ## Options
