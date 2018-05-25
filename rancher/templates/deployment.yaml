@@ -12,10 +12,34 @@ spec:
       serviceAccountName: rancher-admin
       containers:
       - image: rancher/rancher:{{ .Values.rancher_image_tag }}
-        imagePullPolicy: Always
         name: rancher-server
         ports:
         - containerPort: 80
           protocol: TCP
         - containerPort: 443
           protocol: TCP
+        args:
+{{- if eq .Values.ingress.tls "publicCA" }}
+        # Clear ca certs for public trusted CAs
+        - "--no-cacerts"
+{{- end }}
+{{- if eq .Values.ingress.tls "letsEncrypt" }}
+        # Clear ca certs for letsEncrypt trusted CA
+        - "--no-cacerts"
+{{- end }}
+        - "--http-listen-port=80"
+        - "--https-listen-port=443"
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+{{- if eq .Values.ingress.tls "privateCA" }}
+        # Pass CA cert into rancher for private CA
+        volumeMounts:
+        - mountPath: /etc/rancher/ssl
+          name: tls-rancher-server-volume
+          readOnly: true
+      volumes:
+      - name: tls-rancher-server-volume
+        secret:
+          defaultMode: 420
+          secretName: tls-rancher-server
+{{- end }}

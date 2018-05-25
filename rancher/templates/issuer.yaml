@@ -1,4 +1,4 @@
-{{- if .Values.letsEncrypt.enabled -}}
+{{- if eq .Values.ingress.tls "letsEncrypt" -}}
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Issuer
 metadata:
