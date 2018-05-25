@@ -27,8 +27,21 @@ spec:
         # Clear ca certs for letsEncrypt trusted CA
         - "--no-cacerts"
 {{- end }}
+{{- if .Values.debug }}
+        - "--debug"
+{{- end }}
         - "--http-listen-port=80"
         - "--https-listen-port=443"
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 30
         resources:
 {{ toYaml .Values.resources | indent 10 }}
 {{- if eq .Values.ingress.tls "privateCA" }}

@@ -1,4 +1,7 @@
-# Fully qualified name to reach your Rancher Server
+# Add debug flag to Rancher server
+debug: false
+
+# Fully qualified name to reach your Rancher server
 fqdn: rancher.localhost
 
 ### Ingress ###
@@ -26,11 +29,11 @@ fqdn: rancher.localhost
 # You can add your own private CA signed certs. Create the secret like above but
 # also add your CA Cert to `tls-rancher-server` secret.
 #
-# Copy the CA cert into a file named `cacert.pem` and use `kubectl` to create
+# Copy the CA cert into a file named `cacerts.pem` and use `kubectl` to create
 # the secret.
 #
 # kubectl -n rancher-system create secret generic tls-rancher-server \
-# --from-file=cacert.pem
+# --from-file=cacerts.pem
 #
 # fqdn=your.domain.name.com 
 # ingress.tls=privateCA
